@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+          "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+ <mapper namespace="com.aaa.idao.IMeetingDao">
+	<select id="queryMeetingAll" resultType="map">
+		select * from meeting
+	</select>
+	<insert id="insMeeting" parameterType="meetingVo">
+		insert into Meeting(MeetingName,Url,UID,Site,Equip,State,Capacity)
+		values (#{MeetingName},#{Url},#{UID},#{Site},#{Equip},0,#{Capacity})
+	</insert>
+ </mapper> 

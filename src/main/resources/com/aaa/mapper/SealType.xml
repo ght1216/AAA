@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+          "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+ <mapper namespace="com.aaa.idao.ISealTypeDao">
+	<select id="querySealType" resultType="map">
+		select s.SealTypeID,SealName,s.Url,Uname from sealtype s
+		inner join roleseal rs
+		on s.SealTypeID=rs.SealTypeID
+		inner join user u
+		on rs.UID=u.UID
+	</select>
+	<insert id="insSealType" parameterType="SealTypeVo">
+		
+	</insert>
+ </mapper> 

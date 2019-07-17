@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+          "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+ <mapper namespace="com.aaa.idao.IPermissionDao">
+   		
+ 	<select id="findByLoginRole" resultType="map" parameterType="int">
+ 		select * from Permission 
+	 	where PermID in
+	 		(select PermID from RolePerm where RoleID =#{RoleID})
+ 	</select>
+ 	<select id="login" resultType="map" parameterType="userVo">
+ 		select * from User where 
+ 		Uname=#{Uname} and Upwd=#{Upwd}
+ 	</select>
+ 	<select id="getUser" resultType="map" >
+ 	 	<if test="rid==1">
+ 	 		select * from  User
+ 	 	</if>		
+		<if test="rid!=1">
+			select * from  Role r inner join
+				User u on u.RoleID=r.RoleID
+				inner join Dept d on r.DeptID=d.DeptID
+				where u.UID=#{UID}
+		</if>
+		
+			
+ 	</select>
+ 	<update id="updPwd" parameterType="userVo">
+ 		update User set Upwd=#{Upwd} where UID=#{Uid}
+ 	</update>
+ 	
+ 	<insert id="sysLog" parameterType="sysLogVo">
+ 		insert into SysLog(UID,LoginDate) values(#{UID},now())
+ 	</insert>
+ </mapper> 
